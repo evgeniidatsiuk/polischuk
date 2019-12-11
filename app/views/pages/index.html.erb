@@ -1,2 +1,11 @@
-<h1>Pages#index</h1>
-<p>Find me in app/views/pages/index.html.erb</p>
+<%= form_for :table, url: cal_path do |f| %>
+<%=f.label :n%>
+<%=f.number_field :n,value:1, min:1, max:10%>
+<%=f.label :m%>
+<%=f.number_field :m,value:1, min:1,max:10%>
+<div id="table1">
+  <%= pp f %>
+<%= gen_as(f,2,8)%>
+</div>
+<%=f.submit %>
+<%end%>
