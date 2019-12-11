@@ -1,11 +1,18 @@
 # frozen_string_literal: true
 
 module PagesHelper
-  def gen_as(f, n, m)
-    f.fields_for(:us) do |s|
-      content_tag :div, class: 'row' do
-        (1..n).collect { |i| gen_a(s, i, m) }.join(' ').html_safe
-      end
+  def gen_as(n, m)
+    form_for(:table, url: cal_path) do |f|
+      [f.label(:n),
+       f.number_field(:n, value: n, min: 1, max: 10, onChange: 'resize()'),
+       f.label(:m),
+       f.number_field(:m, value: m, min: 1, max: 10, onChange: 'resize()'),
+       f.fields_for(:us) do |s|
+         content_tag :div, class: 'row' do
+           (1..n).collect { |i| gen_a(s, i, m) }.join(' ').html_safe
+         end
+       end,
+       f.submit].join(' ').html_safe
     end
   end
 

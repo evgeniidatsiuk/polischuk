@@ -4,8 +4,8 @@ class PagesController < ApplicationController
   def index; end
 
   def resize
-    @n = params[:n]
-    @m = params[:m]
+    pp @n = params[:n].to_i
+    pp @m = params[:m].to_i
   end
 
   def cal

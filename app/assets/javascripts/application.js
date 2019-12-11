@@ -11,6 +11,20 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery3
+//= require jquery_ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+function resize() {
+  $.ajax({
+    url: "/resize",
+    type: "GET",
+    dataType: "script",
+    data: {
+      n: $('#table_n').val(),
+      m: $('#table_m').val()
+    }
+  });
+}
