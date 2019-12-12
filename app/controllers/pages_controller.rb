@@ -4,18 +4,28 @@ class PagesController < ApplicationController
   def index; end
 
   def resize
-    pp @n = params[:n].to_i
-    pp @m = params[:m].to_i
+    @n = params[:n].to_i
+    @m = params[:m].to_i
   end
 
   def cal
     as = params[:table]
-    n = as[:n].to_i
-    m = as[:m].to_i
-    x_a = {}
-    f_a = {}
-    al_a = {}
-    r_a = {}
+    @n = as[:n].to_i
+    @m = as[:m].to_i
+    # step 1
+    @x_a = {}
+    @f_a = {}
+    # step 2
+    @al_a = {}
+    # step 3
+    l = {}
+    @r_a = {}
+    # step 4
+    w = {}
+    # step 6
+    v_a = {}
+    t_a = {}
+    sl = {}
     as[:us].each do |a_i, a|
       x = {}
       f = {}
@@ -23,74 +33,78 @@ class PagesController < ApplicationController
       a.each do |k_i, k|
         # pp "#{k_i}: #{k}"
         if k_i == 'l'
-          al_a[a_i] = f.values.sum / f.length
-          r_a[a_i] = al_a[a_i] * k.to_f
+          # step 3
+          l[a_i.to_i] = k.to_f
+        elsif k_i == 'w'
+          # step 4
+          w[a_i.to_i] = k.to_i
+        elsif k_i == 'sl'
+          # step 6
+          sl[a_i.to_i] = k.to_i
+        elsif k_i == 't'
+          # step 6
+          t_a[a_i.to_i] = k.to_i
+        elsif k_i == 'v'
+          # step 6
+          v_a[a_i.to_i] = k.to_i
         else
           u = k[:u].to_f
           t = ret[k[:t].to_sym]
-          x[k_i] = if u <= 0.5
-                     Math.sqrt(u / 2) * (t.last - t.first) + t.first
-                   else
-                     t.second - Math.sqrt((1 - u) / 2) * (t.last - t.first)
+          x[k_i.to_i] = if u <= 0.5
+                          Math.sqrt(u / 2) * (t.last - t.first) + t.first
+                        else
+                          t.second - Math.sqrt((1 - u) / 2) * (t.last - t.first)
           end
-          f[k_i] = x[k_i] / 100
+          f[k_i.to_i] = x[k_i.to_i] / 100
         end
-        x_a[a_i] = x
-        f_a[a_i] = f
       end
-      pp x_a
+      # step 1
+      @x_a[a_i.to_i] = x
+      @f_a[a_i.to_i] = f
+      # step 2
+      @al_a[a_i.to_i] = f.values.sum.to_f / f.length
+      # step 3
+      @r_a[a_i.to_i] = @al_a[a_i.to_i] * l[a_i.to_i]
     end
     # step 4
-    w = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    v = []
-    w.each do |i|
-      puts i
-      p 'sum', i.to_f / w.sum
-      v << i.to_f / w.sum
+    @v = {}
+    w.each do |i, value|
+      # p [i,value]
+      @v[i.to_i] = value.to_f / w.values.sum
     end
-    v = [0.37, 0.3, 0.33]
-    l = [0.2623, 0.1262, 0.2915]
-    # step 5
-    y3 = []
-    3.times do |i|
-      puts "#{v[i]} * ( 1-#{l[i]})"
-      y3 << (v[i] * (1 - l[i]))
+    # p 'step 5'
+    @y = {}
+    @y[1] = 1 - 1.to_f / (1..@n).collect { |i| @v[i].to_f / (1 - @r_a[i]) }.sum
+    @y[2] = 1 - (1..@n).collect { |i| (1 - @r_a[i])**@v[i] }.inject(1) { |res, value| res * value }
+    @y[3] = 1 - (1..@n).collect { |i| @v[i] * (1 - @r_a[i]) }.sum
+    @y[4] = 1 - Math.sqrt((1..@n).collect { |i| (@v[i] * (1 - @r_a[i]))**2 }.sum)
+    # # step 6
+    # #pp [sl,t_a,v_a]
+    @s = {}
+    @z = {}
+    @u = {}
+    (1..@n).each do |i|
+      @s[i] = sl[i] * t_a[i] + v_a[i]
+      # pp [@s[i], @r_a[i]]
+      @z[i] = @s[i] * @r_a[i]
+      a = @s[i].to_f * 0.1
+      b = @s[i]
+      @u[i] = if @z[i] <= a
+                0
+              elsif @z[i] > b
+                1
+              else
+                (@z[i] - a).to_f / (b - a)
+             end
     end
-    y3 = 1 - y3.sum
-    # step 6
-    z = []
-    s = [1, 2, 3, 4]
-    r = [1, 2, 3, 4]
-    4.times do |i|
-      z << s[i] * r[i]
-    end
-    u = []
-    a = []
-    b = []
-    s.each do |x|
-      a << x.to_f * 0.1
-      b << x
-    end
-    5.times do |i|
-      u << if z[i] <= a[i]
-             0
-           elsif a[i] < z[i] && z[i] <= b[i]
-             (z[i] - a[i]) / b[i] - a[i]
-           elsif z[i] > b[i]
-             1
-          end
-    end
-    # step 7
-    ###
-    # step 8
-    v = [0.37, 0.3, 0.33]
-    o = [0.2623, 0.1262, 0.2915]
-    y3 = []
-    3.times do |i|
-      puts "#{v[i]} * ( 1-#{o[i]})"
-      y3 << (v[i] * (1 - o[i]))
-    end
-    y3 = 1 - y3.sum
+    # # step 7
+    @o = { 1 => 0.2623, 2 => 0.1262, 3 => 0.2915 }
+    # # step 8
+    @y_r = {}
+    @y_r[1] = 1 - 1.to_f / (1..@n).collect { |i| @v[i].to_f / (1 - @o[i]) }.sum
+    @y_r[2] = 1 - (1..@n).collect { |i| (1 - @o[i])**@v[i] }.inject(1) { |res, value| res * value }
+    @y_r[3] = 1 - (1..@n).collect { |i| @v[i] * (1 - @o[i]) }.sum
+    @y_r[4] = 1 - Math.sqrt((1..@n).collect { |i| (@v[i] * (1 - @o[i]))**2 }.sum)
   end
 
   def ret

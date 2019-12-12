@@ -1,0 +1,157 @@
+<h2>Step1</h2>
+<table>
+
+  <tr>
+    <% (1..@n).each do |i| %>
+    <th>k[i,j]</th>
+    <th>x</th>
+    <th>f</th>
+    <%end%>
+  </tr>
+  <% (1..@m).each do |j| %>
+
+      <tr>
+        <% (1..@n).each do |i| %>
+        <td>
+          <%= "k[#{i},#{j}]"%>
+        </td>
+
+        <td>
+          <%=@x_a[i][j].round(2)%>
+        </td>
+        <td>
+          <%=@f_a[i][j].round(4)%>
+        </td>
+          <%end%>
+      </tr>
+
+  <%end%>
+</table>
+<h2>Step 2-8</h2>
+<table>
+  <tr>
+    <th>A[i]</th>
+    <th>a</th>
+    <th>r</th>
+    <th>v</th>
+    <th>Y</th>
+    <th>S</th>
+    <th>Z</th>
+    <th>U</th>
+    <th>O</th>
+    <th>Y_R</th>
+  </tr>
+  <%(1..@n).each do |i|%>
+    <tr>
+      <td><%=i%></td>
+      <td><%=@al_a[i].round(4)%></td>
+      <td><%=@r_a[i].round(4)%></td>
+      <td><%=@v[i].round(2)%></td>
+      <td><%=@y[i].round(4)%></td>
+      <td><%=@s[i].round(4)%></td>
+      <td><%=@z[i].round(4)%></td>
+      <td><%=@u[i].round(4)%></td>
+      <td><%=@o[i].round(4)%></td>
+      <td><%=@y_r[i].round(4)%></td>
+    </tr>
+  <%end%>
+</table>
+<h2>Step2</h2>
+<table>
+  <tr>
+    <th>A[i]</th>
+    <th>a</th>
+  </tr>
+  <%@al_a.each do |i,a|%>
+    <tr>
+      <td><%=i%></td>
+      <td><%=a.round(4)%></td>
+    </tr>
+  <%end%>
+</table>
+<h2>Step3</h2>
+<table>
+  <tr>
+    <th>A[i]</th>
+    <th>r</th>
+  </tr>
+  <%@r_a.each do |i,r|%>
+    <tr>
+      <td><%=i%></td>
+      <td><%=r.round(4)%></td>
+    </tr>
+  <%end%>
+</table>
+<h2>Step4</h2>
+<table>
+  <tr>
+    <th>A[i]</th>
+    <th>v</th>
+  </tr>
+  <%@v.each do |i,v|%>
+    <tr>
+      <td><%=i%></td>
+      <td><%=v.round(2)%></td>
+    </tr>
+  <%end%>
+</table>
+<h2>Step5</h2>
+<table>
+  <tr>
+    <th>Рівень міркування </th>
+    <th>y</th>
+  </tr>
+  <%@y.each do |i,y|%>
+    <tr>
+      <td><%=i%></td>
+      <td><%=y.round(4)%></td>
+    </tr>
+  <%end%>
+</table>
+
+<h2>Step6</h2>
+<table>
+  <tr>
+    <th>A[i] </th>
+    <th>S</th>
+    <th>Z</th>
+    <th>U</th>
+  </tr>
+  <%(1..@n).each do |i|%>
+    <tr>
+      <td><%=i%></td>
+      <td><%=@s[i]%></td>
+      <td><%=@z[i].round(2)%></td>
+      <td><%=@u[i].round(6)%></td>
+    </tr>
+  <%end%>
+</table>
+
+<h2>Step7</h2>
+<table>
+  <tr>
+    <th>А[i]</th>
+    <th>O</th>
+  </tr>
+  <%@o.each do |i,o|%>
+    <tr>
+      <td><%=i%></td>
+      <td><%=o.round(4)%></td>
+    </tr>
+  <%end%>
+</table>
+
+
+<h2>Step8</h2>
+<table>
+  <tr>
+    <th>Рівень міркування </th>
+    <th>y</th>
+  </tr>
+  <%@y_r.each do |i,y|%>
+    <tr>
+      <td><%=i%></td>
+      <td><%=y.round(4)%></td>
+    </tr>
+  <%end%>
+</table>
