@@ -1,5 +1,14 @@
+<div id="table">
+  <%= gen_as(1,1)%>
+</div>
 
-
-  <div id="table">
-    <%= gen_as(1,1)%>
-  </div>
+<script type="text/javascript">
+  $(function () {
+    if (localStorage.getItem('table_us_1_1_t')) {
+      $("#table_us_1_1_t option").eq(localStorage.getItem('table_us_1_1_t')).prop('selected', true);
+    }
+    $("#table_us_1_1_t").on('change', function () {
+      localStorage.setItem('table_us_1_1_t', $('option:selected', this).index());
+    });
+  });
+</script>
