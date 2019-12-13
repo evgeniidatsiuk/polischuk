@@ -4,11 +4,68 @@
 
 <script type="text/javascript">
   $(function () {
+    // select  T
     if (localStorage.getItem('table_us_1_1_t')) {
       $("#table_us_1_1_t option").eq(localStorage.getItem('table_us_1_1_t')).prop('selected', true);
     }
     $("#table_us_1_1_t").on('change', function () {
       localStorage.setItem('table_us_1_1_t', $('option:selected', this).index());
+    });
+    // input N
+    if (localStorage.getItem('table_n')) {
+      $("#table_n").val((localStorage.getItem('table_n')));
+    }
+    $("#table_n").on('change', function () {
+      localStorage.setItem('table_n', $('#table_n').val());
+    });
+    // input M
+    if (localStorage.getItem('table_m')) {
+      $("#table_m").val((localStorage.getItem('table_m')));
+    }
+    $("#table_m").on('change', function () {
+      localStorage.setItem('table_m', $('#table_m').val());
+    });
+    // input L
+    if (localStorage.getItem('table_us_1_l')) {
+      $("#table_us_1_l").val((localStorage.getItem('table_us_1_l')));
+    }
+    $("#table_us_1_1_u").on('change', function () {
+      localStorage.setItem('table_us_1_1_u', $('#table_us_1_1_u').val());
+    });
+    // input U
+    if (localStorage.getItem('table_us_1_1_u')) {
+      $("#table_us_1_1_u").val((localStorage.getItem('table_us_1_1_u')));
+    }
+    $("#table_us_1_1_u").on('change', function () {
+      localStorage.setItem('table_us_1_1_u', $('#table_us_1_1_u').val());
+    });
+    // input W
+    if (localStorage.getItem('table_us_1_w')) {
+      $("#table_us_1_w").val((localStorage.getItem('table_us_1_w')));
+    }
+    $("#table_us_1_w").on('change', function () {
+      localStorage.setItem('table_us_1_w', $('#table_us_1_w').val());
+    });
+    // input прибуток роботи МІС (серверу) за годину (Євро)
+    if (localStorage.getItem('table_us_1_sl')) {
+      $("#table_us_1_sl").val((localStorage.getItem('table_us_1_sl')));
+    }
+    $("#table_us_1_sl").on('change', function () {
+      localStorage.setItem('table_us_1_sl', $('#table_us_1_sl').val());
+    });
+    // input час відновлення роботи серверу (година)
+    if (localStorage.getItem('table_us_1_t')) {
+      $("#table_us_1_t").val((localStorage.getItem('table_us_1_t')));
+    }
+    $("#table_us_1_t").on('change', function () {
+      localStorage.setItem('table_us_1_t', $('#table_us_1_t').val());
+    });
+    // input вартість відновлення роботи МІС (Євро)
+    if (localStorage.getItem('table_us_1_v')) {
+      $("#table_us_1_v").val((localStorage.getItem('table_us_1_v')));
+    }
+    $("#table_us_1_v").on('change', function () {
+      localStorage.setItem('table_us_1_v', $('#table_us_1_v').val());
     });
   });
 </script>
